@@ -63,9 +63,10 @@
       position: absolute;
       top: 50%;
       transition: all 0.5s;
-      transition-timing-function: cubic-bezier(0.01, 2.7, 0.58, 1);
       transform-origin: 100%;
       transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 
   </style>
@@ -82,9 +83,9 @@
     const seconds = now.getSeconds();
     const minutes = now.getMinutes();
     const hour = now.getHours();
-    const secDegrees = (seconds / 60) * 360 + 90;
-    const minDegrees = (minute / 60) * 360 + 90;
-    const hourDegrees = ((hour / 12) * 360) + ((minutes/60)*30) + 90;
+    const secDegrees = ((seconds / 60) * 360) + 90;
+    const minDegrees = ((minutes / 60) * 360) + 90;
+    const hourDegrees = ((hour / 12) * 360) + ((minutes / 60) * 360) + 90;
     secHand.style.transform = `rotate(${secDegrees}deg)`;
     minHand.style.transform = `rotate(${minDegrees}deg)`;
     hourHand.style.transform = `rotate(${hourDegrees}deg)`;
@@ -92,6 +93,8 @@
   }
   
   setInterval(setDate, 1000);
+
+  setDate();
 
   </script>
 </body>
