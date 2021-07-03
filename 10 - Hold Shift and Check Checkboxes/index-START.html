@@ -101,22 +101,22 @@ const checkBoxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 let lastChecked;
 
 function handleCheck(e){
-  if (e.shiftKey && this.checked){
-    let inBetween = false;
+  let inBetween = false;
+  if (e.shiftKey && this.checked) {
     checkBoxes.forEach(checkbox => {
-      console.log(checkbox)
-      if (checkbox === this || checkbox === lastChecked) {
-        inBetween = !inBetween;
-        console.log("starting inbetween")
+      if (checkbox === this || checkbox === lastChecked){
+        console.log("start and end")
+        inBetween = !inBetween; 
       }
-      if (inBetween === true){
-        checkbox.checked = true
-      }
+      if (inBetween){
+          checkbox.checked = true;
+        }
     })
-
   }
 
-  lastChecked = this;
+  
+  lastChecked = this
+
 }
 
 
