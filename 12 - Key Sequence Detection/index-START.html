@@ -7,6 +7,30 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  var secretCode = 'wesbos';
+  window.addEventListener('keyup',  e => {
+    
+    console.log(pressed.join(''));
+    if (pressed.length < 6) {
+      pressed.push(e.key)
+    } else if (pressed.length === 6){
+      pressed.shift()
+      pressed.push(e.key)
+      console.log(pressed)
+    }
+
+    // pressed.splice(-secretCode.length - 1, pressed.length - secreCode.length)
+
+
+    if (pressed.join('').toLowerCase() === secretCode){
+      console.log("SECRET COMMAND ACTION CODE TRIGGERED! COMMENCE KAMEHAMEHA")
+      cornify_add();
+    }
+
+  })
+
+
 </script>
 </body>
 </html>
