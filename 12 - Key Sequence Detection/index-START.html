@@ -12,6 +12,7 @@
   window.addEventListener('keyup',  e => {
     
     console.log(pressed.join(''));
+    
     if (pressed.length < 6) {
       pressed.push(e.key)
     } else if (pressed.length === 6){
