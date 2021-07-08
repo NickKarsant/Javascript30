@@ -62,6 +62,7 @@
 
     function populateList(plates = [], platesList) {
       platesList.innerHTML = plates.map((plate, i) => {
+
         return `
         <li>          
           <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
@@ -76,8 +77,26 @@
       localStorage.setItem('items', JSON.stringify(things))
     }
 
+    function toggleDone(e){
+      if (e.target.matches('input')) return;
+      const el = e.target
+      const index = el.dataset.index;
+      items[index].dome = !items[index].done;
+      localStorage.setItem('items', JSON.stringify(items))
+      populateList(items, itemsList);
+
+    }
+
+
+
+
     addItems.addEventListener('submit', addItem)
       populateList(items, itemsList);
+
+
+      itemsList.addEventListener('click', toggleDone);
+
+
   </script>
 
 
