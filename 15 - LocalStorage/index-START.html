@@ -87,16 +87,47 @@
 
     }
 
-
-
-
     addItems.addEventListener('submit', addItem)
       populateList(items, itemsList);
 
 
-      itemsList.addEventListener('click', toggleDone);
+    itemsList.addEventListener('click', toggleDone);
 
 
+    function checkAll(){
+      
+    }
+
+
+    function uncheckAll(){
+
+    }
+
+
+
+      // itemsList.addEventListener('click', handleCheck);
+//       const checkBoxes = document.querySelectorAll('[type=checkbox]');
+
+// let lastChecked;
+
+// function handleCheck(e){
+//   let inBetween = false;
+//   if (e.shiftKey && this.checked) {
+//     checkBoxes.forEach(checkbox => {
+//       if (checkbox === this || checkbox === lastChecked){
+//         console.log("start and end")
+//         inBetween = !inBetween; 
+//       }
+//       if (inBetween){
+//           checkbox.checked = true;
+//         }
+//     })
+//   }
+//   lastChecked = this
+// }
+
+
+// checkBoxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
   </script>
 
 
