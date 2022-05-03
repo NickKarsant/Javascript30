@@ -5,42 +5,67 @@
   <title>Speech Detection</title>
 </head>
 <body>
-
-  <div class="words" contenteditable>
+  <div class='header'>
+    Speech to Text.  Also ask "get the weather"
   </div>
 
-<script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  const recognition = new SpeechRecognition();
-
-  recognition.interimResults = true;
-
-  let p = document.createElement('p');  
-  const words = document.querySelector('.words');
-  words.appendChild(p);
-
-  recognition.addEventListener('result', e => {
-    const transcript = Array.from(e.results)
-    .map(result =>  result[0])
-    .map(result =>  result.transcript)
-    .join('')
+  <div class="words" contenteditable>
     
-    p.textContent = transcript;
+  </div>
 
-    if (e.results[0].isFinal){
-      p = document.createElement('p');
-      words.appendChild(p)
-    }
 
-    if (transcript.includes('unicorn')){
-      console.log('DING')
-    }
-  })
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
   
-  recognition.addEventListener('end', recognition.start);
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+ 
+ const  recognition = new SpeechRecognition();
+recognition.interimResults = true
 
-  recognition.start();
+
+let p = document.createElement('p');
+let words  = document.querySelector('.words');
+words.appendChild(p);
+
+const getWeather = async () => {
+  let res = await axios.post('https://api.openweathermap.org/data/2.5/weather?lat=37.7749&lon=-122.4194&appid=f4adce4942ee2368f4da4176258de605')
+
+  let main = res.data.main
+
+  const feelsLike = Math.round((parseInt(main.feels_like) - 273.15) * 1.8 + 32)
+
+p.innerHTML = 'The temperature today is ' + feelsLike + 'F'
+
+}
+
+
+recognition.addEventListener('result', e => {
+  let transcript = e.results[0][0].transcript;
+ 
+
+  if (e.results[0].isFinal){
+    p = document.createElement('p');
+    words.appendChild(p);
+    p.innerHTML = transcript
+  }
+
+  if (transcript.includes('unicorn')){
+    transcript = transcript.replace('unicorn' || 'Unicorn', '🦄')
+   p.innerHTML = transcript
+}
+
+  if (transcript.includes('get the weather')){
+    p.innerHTML = 'Retrieving weather data, One moment...'
+    getWeather(); 
+  }
+
+
+
+});
+
+recognition.start();
+
+recognition.addEventListener('end', recognition.start);
 
 </script>
 
