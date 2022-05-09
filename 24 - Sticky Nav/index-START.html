@@ -55,6 +55,23 @@
 
 <script>
 
+  const nav = document?.getElementById('main'); 
+
+  const navTop = nav.offsetTop;
+
+  function affixNav() {
+  if (window?.scrollY >= navTop){
+    document.body.style.paddingTop = nav.offsetHeight + 'px';
+    document.body.classList.add('affixed-nav') 
+  } else {
+      document.body.style.paddingTop =0;
+    document.body.classList.remove('affixed-nav')  
+  }
+  }
+
+window.addEventListener('scroll', affixNav);
+
+
 </script>
 
 </body>
