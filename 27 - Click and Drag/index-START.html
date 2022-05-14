@@ -35,6 +35,51 @@
   </div>
 
 <script>
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  const slider = document.querySelector('.items')
+
+  var mouseDownFunc = function(e){ 
+    isDown = true
+    slider.classList.add('active')
+    startX = e.pageX - slider.offsetLeft
+    scrollLeft = slider.scrollLeft
+  }
+  
+  var mouseLeaveFunc = function(e){
+    isDown = false;
+    slider.classList.remove('active')
+  }
+  
+  var mouseUpFunc = function(){
+    isDown = false
+    slider.classList.remove('active')
+
+  }
+
+  var mouseMoveFunc = function(e){
+    
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const displacement = (x - startX) * 5
+    slider.scrollLeft = scrollLeft - walk;
+  }
+
+
+  slider.addEventListener('mousedown', (e)=> mouseDownFunc(e))
+
+
+  slider.addEventListener('mouseleave', (e)=> mouseLeaveFunc(e))
+
+
+  slider.addEventListener('mouseup', (e) => mouseUpFunc(e))
+
+
+  slider.addEventListener('mousemove',(e) => mouseMoveFunc(e))
+
+
+
 </script>
 
   </body>
